@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from requests import Session
 from urllib3 import encode_multipart_formdata
 from datetime import datetime,timedelta
@@ -76,8 +75,7 @@ def report(usr,pas):
         apply['ttoken']=findall('ttoken" value="(.*?)"',r.text) or findall('stoken=(.*?)&',r.url)[0]
         del sess.headers['Content-Type']
         r=sess.post('http://yiqing.ctgu.edu.cn/wx/health/saveApply.do',data=apply)
-    if(login.text=='success'):
-        print("打卡成功")
+
         log.append([[usr,pas],strftime("%Y-%m-%d %H:%M:%S",localtime(his[0]['scrq']/1000))+' '+eval(r.text)["msgText"]+' '+his[0]['xm']])
     else:
         log.append([[usr,pas],strftime("%Y-%m-%d %H:%M:%S",localtime(his[0]['scrq']/1000))+' 已上报  '+his[0]['xm']])
@@ -103,7 +101,7 @@ while True:
 
 # 微信通知
 def send_message(key, message, clock_info):
-    send_url = "https://sc.ftqq.com/{}.send?text={}&desp={}".format(key, message, clock_info)
+    send_url = "https://sc.ftqq.com/{}.send?text={"'打卡成功'"}&desp={}".format(key, message, clock_info)
     requests.get(send_url)
 
   
