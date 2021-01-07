@@ -78,7 +78,7 @@ def report(usr,pas):
         r=sess.post('http://yiqing.ctgu.edu.cn/wx/health/saveApply.do',data=apply)
 	
     
-    if(login.text='success'):
+    if(login.text=='success'):
         print("打卡成功")
     else:
         print("打卡失败")
