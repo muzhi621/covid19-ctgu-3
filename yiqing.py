@@ -79,8 +79,8 @@ def report(usr,pas):
 	
 	
       
-       result = login
-       if result.text == 'success':
+      
+       if login.text == 'success':
            print("打卡成功")
          
        else:
