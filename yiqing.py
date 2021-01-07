@@ -9,7 +9,7 @@ from time import time,localtime,strftime
 import os
 parm = eval(os.environ['PARM'])
 try:
-    server_key = eval(os.environ["key"])  # server酱key,登录之后就可使用
+    server_key = eval(os.environ["KEY"])  # server酱key,登录之后就可使用
 except:
     server_key = ""
 
