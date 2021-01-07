@@ -78,17 +78,14 @@ def report(usr,pas):
         r=sess.post('http://yiqing.ctgu.edu.cn/wx/health/saveApply.do',data=apply)
 	
 	
-       print("提交信息:", apply)
+      
        result = r.json()
        if result.get('m') == "操作成功":
            print("打卡成功")
-           if server_key != "":
-                send_message(server_key, result.get('m'), apply)
+         
        else:
            print("打卡失败，错误信息: ", r.json().get("m"))
-           if server_key != "":
-               send_message(server_key, result.get('m'), apply)
-
+  
 
 	
 	
