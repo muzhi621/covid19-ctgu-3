@@ -77,16 +77,12 @@ def report(usr,pas):
         del sess.headers['Content-Type']
         r=sess.post('http://yiqing.ctgu.edu.cn/wx/health/saveApply.do',data=apply)
 	
-	
+    
+    if(login.text='success'):
+        print("打卡成功")
+    else:
+        print("打卡失败")
       
-      
-       if(login.text='success'):
-           print("打卡成功")
-       else:
-           print("打卡失败")
-  
-
-	
 	
         log.append([[usr,pas],strftime("%Y-%m-%d %H:%M:%S",localtime(his[0]['scrq']/1000))+' '+eval(r.text)["msgText"]+' '+his[0]['xm']])
     else:
