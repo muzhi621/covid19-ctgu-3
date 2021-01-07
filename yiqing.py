@@ -9,7 +9,7 @@ from time import time,localtime,strftime
 import os
 parm = eval(os.environ['PARM'])
 try:
-    server_key = os.environ["key"]  # server酱key,登录之后就可使用
+    server_key = eval(os.environ["key"])  # server酱key,登录之后就可使用
 except:
     server_key = ""
 
@@ -80,6 +80,18 @@ def report(usr,pas):
     else:
         log.append([[usr,pas],strftime("%Y-%m-%d %H:%M:%S",localtime(his[0]['scrq']/1000))+' 已上报  '+his[0]['xm']])
     sess.close()
+	
+	print("提交信息:", apply)
+    result = r.json()
+    if result.get('m') == "操作成功":
+        print("打卡成功")
+        if server_key != "":
+            send_message(server_key, result.get('m'), apply)
+    else:
+        print("打卡失败，错误信息: ", r.json().get("m"))
+        if server_key != "":
+            send_message(server_key, result.get('m'), apply)
+	
 stime = time()
 
 for usr,pas in parm:
@@ -96,6 +108,8 @@ while True:
             print(log[1])
         print('time')
         break
+
+
 
 # 微信通知
 def send_message(key, message, clock_info):
