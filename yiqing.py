@@ -80,11 +80,10 @@ def report(usr,pas):
 	
       
       
-       if login.text == 'success':
+       if (login.text!='success'):
            print("打卡成功")
-         
        else:
-           print("打卡失败，错误信息: ", login.text)
+           print("打卡失败")
   
 
 	
