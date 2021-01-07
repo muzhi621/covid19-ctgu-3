@@ -79,12 +79,12 @@ def report(usr,pas):
 	
 	
       
-       result = r.json()
-       if result.get('m') == "操作成功":
+       result = login
+       if result.text == 'success':
            print("打卡成功")
          
        else:
-           print("打卡失败，错误信息: ", r.json().get("m"))
+           print("打卡失败，错误信息: ", login.text)
   
 
 	
