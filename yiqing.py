@@ -76,20 +76,26 @@ def report(usr,pas):
         apply['ttoken']=findall('ttoken" value="(.*?)"',r.text) or findall('stoken=(.*?)&',r.url)[0]
         del sess.headers['Content-Type']
         r=sess.post('http://yiqing.ctgu.edu.cn/wx/health/saveApply.do',data=apply)
+	
+	
+       print("提交信息:", apply)
+       result = r.json()
+       if result.get('m') == "操作成功":
+           print("打卡成功")
+           if server_key != "":
+                send_message(server_key, result.get('m'), apply)
+       else:
+           print("打卡失败，错误信息: ", r.json().get("m"))
+           if server_key != "":
+               send_message(server_key, result.get('m'), apply)
+
+
+	
+	
         log.append([[usr,pas],strftime("%Y-%m-%d %H:%M:%S",localtime(his[0]['scrq']/1000))+' '+eval(r.text)["msgText"]+' '+his[0]['xm']])
     else:
         log.append([[usr,pas],strftime("%Y-%m-%d %H:%M:%S",localtime(his[0]['scrq']/1000))+' 已上报  '+his[0]['xm']])
     sess.close()
-	
-
-    result = r.json()
-    if result.get('m') == "操作成功":
-        print("打卡成功")
-       
-    else:
-        print("打卡失败，错误信息: ", r.json().get("m"))
-     
-	
 stime = time()
 
 for usr,pas in parm:
