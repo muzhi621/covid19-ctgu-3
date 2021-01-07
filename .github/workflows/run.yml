@@ -24,7 +24,7 @@ jobs:
       - name: 安装依赖并替换环境变量
         env:
           PARM: ${{ secrets.PARM }}
-          key: ${{ secrets.key }} 
+          KEY: ${{ secrets.key }} 
         run: |
           pip install requests
           echo 开始报平安
